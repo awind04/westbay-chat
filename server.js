@@ -12,7 +12,7 @@ const SYSTEM_PROMPT = `You are a helpful assistant for West Bay Appliance Repair
 
 About the company:
 - Same day appliance repair service
-- Specializes in high-end brands: Sub-Zero, Wolf, Thermador, ZLINE, U-Line
+- Specializes in high-end brands and all major brands: Admiral, Alfresco, Amana, American Range, Ariston, BlueStar, Bosch, Café, Dacor, Electrolux, Fisher & Paykel, Five Star, Frigidaire, GE, Jenn-Air, Haier, Hotpoint, Kenmore, KitchenAid, LG, Liebherr, Magic Chef, Maytag, Miele, Panasonic, Roper, Samsung, Sanyo, Sears, Sharp, Sub-Zero, Summit, Thermador, Thor, Viking, Whirlpool, Wolf
 - 90-Day Labor Warranty
 - OEM-grade parts
 - Clean-Home Protocol
@@ -34,7 +34,7 @@ app.post('/chat', async (req, res) => {
         messages.push({ role: 'user', content: message });
         
         const response = await client.messages.create({
-            model: 'claude-sonnet-4-5',
+            model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-5',
             max_tokens: 500,
             system: SYSTEM_PROMPT,
             messages: messages
